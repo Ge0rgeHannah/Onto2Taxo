@@ -1,0 +1,5 @@
+# Ignore the env/ directory and all its contents
+env/
+
+# Ignore the .python-version file
+.python-version
