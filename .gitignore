@@ -3,3 +3,7 @@ env/
 
 # Ignore the .python-version file
 .python-version
+
+# Ignore the ontology files
+AnIMLOntology2.rdf
+sio.owl
