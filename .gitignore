@@ -7,3 +7,6 @@ env/
 # Ignore the ontology files
 AnIMLOntology2.rdf
 sio.owl
+
+#Ignore the outputs
+AnIMLOntology2.json

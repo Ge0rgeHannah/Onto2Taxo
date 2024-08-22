@@ -15,3 +15,5 @@ Now to run Onto2Taxo run the following command:
 `python main.py -input <input_ontology_path> -output <output_location>`
 
 *Note: to make the above command cleaner, move the input ontology into the Onto2Taxo directory. This allows you to specify the file name of the input and then the output JSON will be placed in the Onto2Taxo directory*
+
+In some cases, depending on how the input ontology has been constructed, the SPARQL queries used may require some modification to allow the program to function correctly. These queries can be found in `main.py` in the `classes_query(onto)` and `subClasses_query(onto)` functions respectively.

@@ -1,6 +1,7 @@
 import argparse
 import json
 import rdflib
+from pathlib import Path
 
 
 # Query the ontology and return the classes as a list
@@ -47,12 +48,43 @@ def subClasses_query(onto):
 
 # Create a list of each node with its associated id
 def populate_nodes(class_list, starting_id=1):
-    pass
+    nodes_list = []
+    current_id = starting_id
+    for c in class_list:
+        class_dict = {"id": current_id,
+                      "label": c}
+        nodes_list.append(class_dict)
+        current_id += 1
+
+    return nodes_list
 
 
 # Create a list of each subClassOf relation
 def populate_edges(relations_list, node_list):
-    pass
+    edges_list = []
+    for r in relations_list:
+        parent_target = r[0]
+        child_target = r[1]
+        tgt = ""
+        src = ""
+
+        # Identify parent
+        for n in node_list:
+            if n["label"] == parent_target:
+                tgt = n["id"]
+
+        # Identify child
+        for n in node_list:
+            if n["label"] == child_target:
+                src = n["id"]
+
+        edge = {"src": src,
+                "tgt": tgt,
+                "label": "original"}
+
+        edges_list.append(edge)
+
+    return edges_list
 
 
 # Generate the taxonomy
@@ -71,13 +103,25 @@ def run(args):
     all_relations = subClasses_query(g)
 
     # TODO: Populate nodes list
+    nodes_list = populate_nodes(all_classes)
 
     # TODO: Populate edges list
+    edges_list = populate_edges(all_relations, nodes_list)
 
     # TODO: Combine nodes and edges lists into a dictionary
+    taxo_dict = {
+        "nodes":nodes_list,
+        "edges":edges_list
+    }
 
     # TODO: Write dictionary to JSON
+    taxo_json = json.dumps(taxo_dict, indent=4)
 
+    onto_path = Path(onto)
+    taxo_name = onto_path.stem
+
+    with open(f"{taxo}{taxo_name}.json", "w") as output:
+        output.write(taxo_json)
 
 
 # Handle and bind arguments
