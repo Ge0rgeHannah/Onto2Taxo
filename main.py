@@ -7,7 +7,7 @@ from pathlib import Path
 # Query the ontology and return the classes as a list
 def classes_query(onto):
 
-    # This query will need to be changed slightly from different ontologies        BIND(STRAFTER(STR(?class), "#") AS ?className)
+    # This query will need to be changed slightly from different ontologies
     query_1 = '''
     SELECT ?className WHERE {
         ?class rdf:type owl:Class .
@@ -26,7 +26,7 @@ def classes_query(onto):
 # Query the ontology and return the subClassOf relations as a list
 def subClasses_query(onto):
     
-    # This query will need to be changed slightly from different ontologies        BIND(STRAFTER(STR(?class), "#") AS ?className)
+    # This query will need to be changed slightly from different ontologies
     query_2 = '''
     SELECT ?parent ?child WHERE {
         ?p rdf:type owl:Class .
