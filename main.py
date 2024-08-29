@@ -96,25 +96,19 @@ def run(args):
     g = rdflib.Graph()
     g.parse(onto)
 
-    # TODO: Query ontology for all classes
     all_classes = classes_query(g)
 
-    # TODO: Query ontology for all rdfs:subClassOf relationships
     all_relations = subClasses_query(g)
 
-    # TODO: Populate nodes list
     nodes_list = populate_nodes(all_classes)
 
-    # TODO: Populate edges list
     edges_list = populate_edges(all_relations, nodes_list)
 
-    # TODO: Combine nodes and edges lists into a dictionary
     taxo_dict = {
         "nodes":nodes_list,
         "edges":edges_list
     }
 
-    # TODO: Write dictionary to JSON
     taxo_json = json.dumps(taxo_dict, indent=4)
 
     onto_path = Path(onto)
